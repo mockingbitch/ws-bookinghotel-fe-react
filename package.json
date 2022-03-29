@@ -1,5 +1,5 @@
 {
-  "name": "react-app-hoi-dan-it",
+  "name": "react-app-clinic",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,8 +9,9 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.0.1",
     "connected-react-router": "^6.9.1",
+    "dateformat": "^5.0.3",
     "lodash": "^4.17.21",
-    "moment": "^2.29.0",
+    "moment": "^2.29.1",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-auth-wrapper": "^1.0.0",
@@ -20,11 +21,14 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^17.0.2",
     "react-flatpickr": "^3.10.7",
+    "react-image-lightbox": "^5.1.1",
     "react-intl": "^5.20.2",
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
+    "react-slick": "^0.28.1",
+    "react-spinners": "^0.11.0",
     "react-toastify": "^5.5.0",
     "reactstrap": "^8.9.0",
     "redux": "^4.1.0",
@@ -33,6 +37,8 @@
     "redux-persist": "^5.10.0",
     "redux-state-sync": "^2.1.0",
     "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1",
+    "sweetalert": "^2.1.2",
     "typescript": "^4.3.2"
   },
   "scripts": {

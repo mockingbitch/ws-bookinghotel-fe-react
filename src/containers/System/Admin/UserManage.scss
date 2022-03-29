@@ -4,11 +4,14 @@
     }
 
     .user-table {
+      table {
+        border-radius: 1em;
+      }
         #customers {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
-            // margin: 0 auto;
+            border-radius: 10px;
           }
           
           #customers td, #customers th {
@@ -56,8 +59,11 @@
   }
 }
 
-.modal-add-user {
+.modal-user {
+  margin-top: 200px;
+
   .modal-body-content {
+    margin-top: 30px;
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
@@ -74,15 +80,27 @@
       input {
         outline: none;
         border-radius: 3px;
-        border: 1px solid grey;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: 1px solid grey;
+        box-shadow: 0 1px 1px rgba(grey, 0.2);
         padding: 10px 10px;
+      }
+
+      input::placeholder {
+        font-size: 12px;
+        font-style: italic;
       }
     }
   }
 
   .modal-content {
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(black, 0.2);
+
     .modal-header {
-      
+      border-radius: 18px 18px 0 0;
       h5 {
         justify-content: center;
           text-align: center;
@@ -91,9 +109,13 @@
       .close {
         outline: none;
         background-color: transparent;
-        color: white;
+        color: black;
         border: none;
         font-size: 40px;
+      }
+
+      .close:hover {
+        color: red;
       }
     }
   }

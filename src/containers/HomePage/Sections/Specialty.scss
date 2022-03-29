@@ -1,0 +1,105 @@
+.section {
+    border-bottom: 3px solid #efeef5;
+
+    .section-specialty {
+        height: 330px;
+        margin: 50px 350px;
+
+        .specialty-container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+
+            .specialty-header {
+                height: 60px;
+
+                .section-title {
+                    font-size: 30px;
+                    font-weight: 500;
+                }
+
+                .btn-view-more {
+                    float: right;
+                    padding: 10px 15px;
+                    border: none;
+                    outline: none;
+                    display: block;
+                    color: black;
+                    background: #ebebeb;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    box-shadow: 2px 4px #888888;
+                    text-transform: uppercase;
+
+                    &:hover {
+                        background: #f7d800;
+                        color: #fff;
+                        box-shadow: 2px 4px red;
+                    }
+                }
+            }
+
+            .slide {
+                padding-top: 20px;
+                padding-bottom: 30px;
+                position: relative;
+
+                .img-content {
+                    margin: 10px !important;
+                    height: 160px;
+                    cursor: pointer;
+
+                    &:hover {
+                        span {
+                            color: #45c3d2;
+                        }
+                    }
+
+                    .specialty-image {
+                        width: 278px;
+                        height: 100%;
+                        background: url("../../../assets/images/specialty/img-1.jpg");
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        background-color: #eee;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//Overwrite slick carousel css
+
+.slick-prev {
+    left: -30px !important;
+    background: grey !important;
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50%;
+    z-index: 1000px !important;
+    opacity: 0.4;
+    color: grey !important;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.slick-next {
+    background: grey !important;
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50%;
+    z-index: 1000px !important;
+    opacity: 0.4;
+    color: grey !important;
+
+    &:hover {
+        opacity: 1;
+    }
+}

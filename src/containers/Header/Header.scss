@@ -1,23 +1,52 @@
 @import "../../styles/common.scss";
 
 .header-container {
-    z-index: 99;
-    display: flex;
-    justify-content: space-between;
-    background-color: $colormain;
+  z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  background-color: $colormain;
+  color: $common-text-color;
+  height: 40px;
+  position: relative;
+  .btn-logout {
     color: $common-text-color;
+    line-height: 40px;
     height: 40px;
-    position: relative;
-    .btn-logout {
-        color: $common-text-color;
-        line-height: 40px;
-        height: 40px;
-        padding: 0 10px;
-        &:hover {
-            background-color: darken($colormain, 5);
-        }
-        i {
-            font-size: $base-size + 1px;
-        }
+    padding: 0 10px;
+    &:hover {
+      background-color: darken($colormain, 5);
     }
+    i {
+      font-size: $base-size + 1px;
+    }
+  }
+
+  .change-lang {
+    display: flex;
+    float: right;
+    // justify-content: center;
+    align-items: center;
+
+    .lang-vi {
+      margin: 20px;
+      background: url("../../assets/images/flagVN.png");
+      width: 50px;
+      height: 30px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      cursor: pointer;
+      box-shadow: 2px 4px #888888;
+    }
+
+    .lang-en {
+      margin: 20px;
+      background: url("../../assets/images/flagUK.png");
+      width: 50px;
+      height: 30px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      cursor: pointer;
+      box-shadow: 2px 4px #888888;
+    }
+  }
 }

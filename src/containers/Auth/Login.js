@@ -6,6 +6,10 @@ import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 import { handleLogin } from '../../services/userService';
 import { userLoginSuccess } from '../../store/actions';
+import ModalRegister from './ModalRegister';
+import swal from 'sweetalert';
+import { LANGUAGES } from '../../utils';
+import { changeLanguageApp } from '../../store/actions';
 
 class Login extends Component {
     constructor(props) {
@@ -14,8 +18,8 @@ class Login extends Component {
             username: '',
             password: '',
             isShowPassword: false,
-            errMessage: ''
-
+            errMessage: '',
+            isOpenModalRegister: false
         }
     }
 
@@ -38,13 +42,13 @@ class Login extends Component {
 
         try {
             let data = await handleLogin(this.state.username, this.state.password);
-            
+
             if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.message
                 })
             }
-            if (data && data.errCode === 0) {   
+            if (data && data.errCode === 0) {
                 this.props.userLoginSuccess(data.user);
             }
         } catch (e) {
@@ -64,14 +68,52 @@ class Login extends Component {
         })
     }
 
+    toggleModal = () => {
+        this.setState({
+            isOpenModalRegister: false,
+        })
+    }
+
+    handleRegister = () => {
+        this.setState({
+            isOpenModalRegister: true
+        })
+    }
+
+    createNewUser = (data) => {
+        console.log(data.email);
+        if (!data.email || !data.phoneNumber || !data.password) {
+            swal("Something went wrong!", "Fields must be not empty!", "warning");
+        } else {
+            swal("Good job!", 'Register successfully, please check your email!', "success");
+            this.setState({
+                isOpenModalAddUser: false
+            })
+        }
+    }
+
+    handleLanguage = (language) => {
+        this.props.changeLanguageAppRedux(language);
+    }
+
     render() {
         return (
+
             <div className='login-background'>
+                <div className='change-lang'>
+                    <div className='lang-vi' onClick={() => this.handleLanguage(LANGUAGES.VI)}></div>
+                    <div className='lang-en' onClick={() => this.handleLanguage(LANGUAGES.EN)}></div>
+                </div>
                 <div className='login-container'>
                     <div className='login-content'>
-                        <div className='col-12 text-login'>Login</div>
+                        {this.state.isOpenModalRegister &&
+                            <ModalRegister
+                                isOpen={this.state.isOpenModalRegister}
+                                toggleFromParent={this.toggleModal}
+                                createNewUser={this.createNewUser}
+                            />}
+                        <div className='col-12 text-login'><FormattedMessage id='login.login' /></div>
                         <div className='col-12 form-group login-input'>
-                            <label>Username:</label>
                             <input type='text'
                                 className='form-control'
                                 placeholder='Enter your username'
@@ -80,7 +122,6 @@ class Login extends Component {
                             />
                         </div>
                         <div className='col-12 form-group login-input'>
-                            <label>Password:</label>
                             <div className='custom-input-password'>
                                 <input type={this.state.isShowPassword ? 'text' : 'password'}
                                     className='form-control'
@@ -97,13 +138,16 @@ class Login extends Component {
                             {this.state.errMessage}
                         </div>
                         <div className='col-12 form-group'>
-                            <button className='btn-login' onClick={() => { this.handleLogin() }}>Login</button>
+                            <button className='btn-login' onClick={() => { this.handleLogin() }}><FormattedMessage id='login.submit' /></button>
                         </div>
-                        <div className='col-12'>
-                            <span className='forgot-password'>Forgot your password?</span>
+                        <hr />
+                        <div className='col-12 text-center'>
+                            <span className='register' onClick={() => this.handleRegister()}><FormattedMessage id='login.register' /> </span>
+                            <span> || </span>
+                            <span className='forgot-password '><FormattedMessage id='login.forgot-password' />?</span>
                         </div>
                         <div className='col-12 text-center mt-3'>
-                            <span className='text-orther-login'>Or Login With:</span>
+                            <span className='text-orther-login'><FormattedMessage id='login.or-login-with' /></span>
                         </div>
                         <div className='col-12 social-login'>
                             <i className="fab fa-google-plus-g google"></i>
@@ -126,8 +170,7 @@ const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
         userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
-        // userLoginFail: () => dispatch(actions.userLoginFail()),
-        // userLoginSuccess: () => dispatch(actions.userLoginSuccess(userInfo))
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };
 

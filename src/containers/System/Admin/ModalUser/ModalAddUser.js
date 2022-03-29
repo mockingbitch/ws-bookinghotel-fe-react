@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 
@@ -15,7 +15,11 @@ class ModalAddUser extends Component {
             address: '',
             firstName: '',
             lastName: '',
-            gender: ''
+            gender: '',
+            message: {
+                content: '',
+                class: ''
+            }
         }
     }
 
@@ -24,6 +28,12 @@ class ModalAddUser extends Component {
 
     toggle = () => {
         this.props.toggleFromParent();
+        this.setState({
+            message: {
+                content: '',
+                class: ''
+            }
+        })
     }
 
     handleOnChange = (e, id) => {
@@ -40,7 +50,12 @@ class ModalAddUser extends Component {
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
-                alert('Missing parameters: ' + arrInput[i]);
+                this.setState({
+                    message: {
+                        content: 'Missing parameters: ' + arrInput[i],
+                        class: 'alert alert-danger'
+                    }
+                })
                 break;
             }
         }
@@ -53,6 +68,16 @@ class ModalAddUser extends Component {
 
         if (isValid === true) {
             this.props.createNewUser(this.state);
+            this.setState({
+                email: '',
+                password: '',
+                rePassword: '',
+                phoneNumber: '',
+                address: '',
+                firstName: '',
+                lastName: '',
+                gender: ''
+            })
         }
     }
 
@@ -61,11 +86,12 @@ class ModalAddUser extends Component {
             <Modal
                 isOpen={this.props.isOpen}
                 toggle={() => this.toggle()}
-                className={'modal-add-user'}
+                className={'modal-user'}
                 size='xl'
             >
                 <ModalHeader toggle={() => this.toggle()}>Add New User</ModalHeader>
                 <ModalBody>
+                    <span className={this.state.message.class}>{this.state.message.content}</span>
                     <div className='modal-body-content'>
                         <div className='input-container'>
                             <label>Email</label>

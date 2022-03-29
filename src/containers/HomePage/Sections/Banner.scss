@@ -1,0 +1,147 @@
+.home-banner {
+    background: url("../../../assets/images/background.jpg");
+    height: 700px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .search {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1));
+        padding: 45px 0;
+        color: #333;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 300px;
+
+        .search-area {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 35px;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 1px #333;
+        }
+
+        .search-form {
+            background: #f7d800;
+            color: #fff;
+            outline: none;
+            border-radius: 25px;
+            border: 1px solid transparent;
+            line-height: 50px;
+            height: 50px;
+            padding-left: 50px;
+            padding-right: 25px;
+            position: relative;
+        }
+
+        i {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #333;
+            text-align: center;
+        }
+
+        input {
+            background: transparent;
+            outline: none;
+            border: none;
+            width: 100%;
+        }
+    }
+
+    .options {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
+        padding-top: 71px;
+        padding-bottom: 20px;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+
+            li {
+                margin: 0;
+                padding: 20px;
+            }
+        }
+
+        a {
+            text-align: center;
+            padding: 5px 5px;
+            color: #333;
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+
+            .service {
+                background: #fff;
+                border-radius: 50%;
+                // -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+                // box-shadow: 1px 2px 4px rgb(0 0 0 / 50%);
+                // box-shadow: 0px 1px 2px rgb(0 0 0 / 50%);
+                width: 50px;
+                height: 50px;
+                margin: 2px auto;
+                background-size: 32px;
+                background-repeat: no-repeat;
+                background-position: center;
+
+                &.chuyen-khoa {
+                    background-image: url("../../../assets/images/khamchuyenkhoa.png");
+                }
+
+                &.tu-xa {
+                    background-image: url("../../../assets/images/khamtuxa.png");
+                }
+
+                &.tong-quat {
+                    background-image: url("../../../assets/images/khamtongquat.png");
+                }
+
+                &.xet-nghiem {
+                    background-image: url("../../../assets/images/dichvuxetnghiem.png");
+                }
+
+                &.suc-khoe {
+                    background-image: url("../../../assets/images/suckhoetinhthan.png");
+                }
+
+                &.nha-khoa {
+                    background-image: url("../../../assets/images/khamchuyenkhoa.png");
+                }
+
+                &.phau-thuat {
+                    background-image: url("../../../assets/images/goiphauthuat.png");
+                }
+
+                &.san-pham-y-te {
+                    background-image: url("../../../assets/images/khamtainha.png");
+                }
+            }
+        }
+
+        a:hover {
+            color: #45c3d2;;
+        }
+    }
+}
