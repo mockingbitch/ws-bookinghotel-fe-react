@@ -19,12 +19,6 @@ const adminReducer = (state = initialState, action) => {
         isLoggedIn: false,
         adminInfo: null,
       };
-    case actionTypes.PROCESS_LOGOUT:
-      return {
-        ...state,
-        isLoggedIn: false,
-        adminInfo: null,
-      };
     default:
       return state;
   }

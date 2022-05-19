@@ -191,5 +191,14 @@
     "role": "Vai trò",
     "position": "Vị trí",
     "created-at": "Ngày thêm"
+  },
+  "home": {
+    "HOME": "TRANG CHỦ",
+    "ABOUT": "THÔNG TIN",
+    "SERVICES": "DỊCH VỤ",
+    "BOOKING": "ĐẶT PHÒNG",
+    "CONTACT": "LIÊN HỆ",
+    "DASHBOARD": "QUẢN TRỊ",
+    "LOGIN": "ĐĂNG NHẬP"
   }
 }

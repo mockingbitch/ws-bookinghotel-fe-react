@@ -7,15 +7,12 @@ import { ToastContainer } from 'react-toastify';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
 import { path } from '../utils'
-import Home from '../routes/Home';
-// import Login from '../routes/Login';
+import Pages from '../routes/Pages';
 import Login from './Auth/Login';
-import Header from './Header/Header';
-import System from '../routes/System';
-
+import Dashboard from '../routes/Dashboard';
 import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
-import HomePage from './HomePage/HomePage';
+import HomePage from '../routes/HomePage';
 
 class App extends Component {
 
@@ -43,14 +40,14 @@ class App extends Component {
                 <Router history={history}>
                     <div className="main-container">
                         <ConfirmModal />
-                        {this.props.isLoggedIn && <Header />}
                         <div className="content-container">
                             <Scrollbars style={{ height: '100vh', width: '100%' }}>
                                 <Switch>
-                                    <Route path={path.HOME} exact component={(Home)} />
-                                    <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                    <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                    <Route path={path.HOMEPAGE} component={HomePage} />
+                                    <Route path={path.HOME} exact={true} component={userIsNotAuthenticated(HomePage)} />
+                                    <Route path={path.LOGIN} exact={true} component={userIsNotAuthenticated(Login)} />
+                                    <Route path={path.PAGES} component={(Pages)} />
+                                    <Route path={path.HOMEPAGE} exact={true} component={userIsAuthenticated(HomePage)} />
+                                    <Route path={path.DASHBOARD} component={userIsAuthenticated(Dashboard)} />
                                 </Switch>
                             </Scrollbars>
                         </div>

@@ -2,8 +2,10 @@ export const path = {
     HOME: '/',
     LOGIN: '/login',
     LOG_OUT: '/logout',
-    SYSTEM: '/system',
-    HOMEPAGE:'/homepage'
+    HOMEPAGE:'/homepage',
+    DASHBOARD: '/dashboard',
+    PAGES: '/page',
+    IMAGELINK: 'http://localhost:8000/public/upload'
 };
 
 export const LANGUAGES = {

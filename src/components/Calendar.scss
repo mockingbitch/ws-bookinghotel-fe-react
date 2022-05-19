@@ -1,0 +1,14 @@
+.calendar {
+    .day {
+        position: relative;
+        width: calc(100% / 7);
+        height: 44px;
+        display: inline-block;
+        background-color: wheat;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        z-index: 1;
+        text-align: center;
+    }
+}

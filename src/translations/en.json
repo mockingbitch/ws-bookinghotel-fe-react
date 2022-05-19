@@ -191,5 +191,14 @@
     "role": "Role",
     "position": "Position",
     "created-at": "Created At"
+  },
+  "home": {
+    "HOME": "HOME",
+    "ABOUT": "ABOUT",
+    "SERVICES": "SERVICES",
+    "BOOKING": "BOOKING",
+    "CONTACT": "CONTACT",
+    "DASHBOARD": "DASHBOARD",
+    "LOGIN": "LOGIN"
   }
 }
