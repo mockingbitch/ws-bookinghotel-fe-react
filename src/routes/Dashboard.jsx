@@ -5,6 +5,7 @@ import HomeDashboard from "../containers/Dashboard/HomeDashboard";
 import Hotel from "../containers/Dashboard/Hotel";
 import Room from "../containers/Dashboard/Room";
 import RoomDetail from "../containers/Dashboard/RoomDetail";
+import Booking from '../containers/Dashboard/Booking';
 import "../assets/css/font-google.css";
 import "../assets/css/login-font.css";
 import "../assets/css/soft-ui-dashboard.css";
@@ -260,7 +261,11 @@ class Dashboard extends Component {
                   <span className="nav-link-text ms-1">Users</span>
                 </a>
               </NavLink>
-              <li className="nav-item">
+              <NavLink
+                to="/dashboard/bookings"
+                onClick={() => this.handleBreadcrumb("Bookings")}
+                className="nav-item"
+              >
                 <a className="nav-link">
                   <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg
@@ -305,7 +310,7 @@ class Dashboard extends Component {
                   </div>
                   <span className="nav-link-text ms-1">Bookings</span>
                 </a>
-              </li>
+                </NavLink>
               <li className="nav-item">
                 <a className="nav-link">
                   <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -668,6 +673,7 @@ class Dashboard extends Component {
                   <Route path="/dashboard/hotels"  component={Hotel} />
                   <Route path="/dashboard/rooms" component={Room} />
                   <Route path="/dashboard/room-detail" component={RoomDetail} />
+                  <Route path="/dashboard/bookings" component={Booking} />
                   {/* <Route
                     component={() => {
                       return <Redirect to={systemMenuPath} />;

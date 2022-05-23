@@ -33,6 +33,7 @@
     "react-flatpickr": "^3.10.7",
     "react-image-lightbox": "^5.1.1",
     "react-intl": "^5.20.2",
+    "react-number-format": "^4.9.3",
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -49,6 +50,7 @@
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2",
+    "time-to-string": "0.0.1",
     "typescript": "^4.3.2"
   },
   "scripts": {
