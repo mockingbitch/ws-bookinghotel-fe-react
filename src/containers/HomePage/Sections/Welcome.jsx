@@ -12,39 +12,39 @@ class Welcome extends Component {
               <div className="col-md-4 welcome-left">
                 <ul>
                   <li>
-                    <a href="#">Lorem Ipsum is not simply random text.</a>
+                    <a >Lorem Ipsum is not simply random text.</a>
                   </li>
                   <li>
-                    <a href="#">There are many variations of passages.</a>
+                    <a >There are many variations of passages.</a>
                   </li>
                   <li>
-                    <a href="#">The standard chunk of Lorem Ipsum.</a>
+                    <a >The standard chunk of Lorem Ipsum.</a>
                   </li>
                 </ul>
               </div>
               <div className="col-md-4 welcome-middle">
                 <ul>
                   <li>
-                    <a href="#">Lorem Ipsum is not simply random text.</a>
+                    <a >Lorem Ipsum is not simply random text.</a>
                   </li>
                   <li>
-                    <a href="#">There are many variations of passages.</a>
+                    <a >There are many variations of passages.</a>
                   </li>
                   <li>
-                    <a href="#">The standard chunk of Lorem Ipsum.</a>
+                    <a >The standard chunk of Lorem Ipsum.</a>
                   </li>
                 </ul>
               </div>
               <div className="col-md-4 welcome-right">
                 <ul>
                   <li>
-                    <a href="#">Lorem Ipsum is not simply random text.</a>
+                    <a >Lorem Ipsum is not simply random text.</a>
                   </li>
                   <li>
-                    <a href="#">There are many variations of passages.</a>
+                    <a >There are many variations of passages.</a>
                   </li>
                   <li>
-                    <a href="#">The standard chunk of Lorem Ipsum.</a>
+                    <a >The standard chunk of Lorem Ipsum.</a>
                   </li>
                 </ul>
               </div>

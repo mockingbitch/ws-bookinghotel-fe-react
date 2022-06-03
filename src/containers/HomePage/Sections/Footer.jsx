@@ -32,16 +32,16 @@ class HomePage extends Component {
                 <h3>FACILITIES</h3>
                 <ul>
                   <li>
-                    <a href="#">Double bedrooms</a>
+                    <a >Double bedrooms</a>
                   </li>
                   <li>
-                    <a href="#">Single bedrooms</a>
+                    <a >Single bedrooms</a>
                   </li>
                   <li>
-                    <a href="#">Royal facilities</a>
+                    <a >Royal facilities</a>
                   </li>
                   <li>
-                    <a href="#">Connected rooms</a>
+                    <a >Connected rooms</a>
                   </li>
                 </ul>
               </div>
@@ -63,15 +63,15 @@ class HomePage extends Component {
                 </a>
                 <ul>
                   <li>
-                    <a href="#" className="f1">
+                    <a  className="f1">
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="f2">
+                    <a  className="f2">
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="f3">
+                    <a  className="f3">
                     </a>
                   </li>
                 </ul>

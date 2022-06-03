@@ -145,7 +145,7 @@ class Search extends Component {
                 <div className="menu-grid">
                   <ul className="menu_drop">
                     <li className="item1">
-                      <a href="#">
+                      <a >
                         <span
                           className="glyphicon glyphicon-chevron-down"
                           aria-hidden="true"
@@ -154,18 +154,18 @@ class Search extends Component {
                       </a>
                       <ul>
                         <li className="subitem1">
-                          <a href="#">Roll-in shower </a>
+                          <a >Roll-in shower </a>
                         </li>
                         <li className="subitem2">
-                          <a href="#">Comfortable bathroom</a>
+                          <a >Comfortable bathroom</a>
                         </li>
                         <li className="subitem3">
-                          <a href="#">WI-FI facility</a>
+                          <a >WI-FI facility</a>
                         </li>
                       </ul>
                     </li>
                     <li className="item2">
-                      <a href="#">
+                      <a >
                         <span
                           className="glyphicon glyphicon-chevron-down"
                           aria-hidden="true"
@@ -174,18 +174,18 @@ class Search extends Component {
                       </a>
                       <ul>
                         <li className="subitem1">
-                          <a href="#">Childcare </a>
+                          <a >Childcare </a>
                         </li>
                         <li className="subitem2">
-                          <a href="#">Gym</a>
+                          <a >Gym</a>
                         </li>
                         <li className="subitem3">
-                          <a href="#">Bar</a>
+                          <a >Bar</a>
                         </li>
                       </ul>
                     </li>
                     <li className="item3">
-                      <a href="#">
+                      <a >
                         <span
                           className="glyphicon glyphicon-chevron-down"
                           aria-hidden="true"
@@ -194,18 +194,18 @@ class Search extends Component {
                       </a>
                       <ul>
                         <li className="subitem1">
-                          <a href="#">Resort</a>
+                          <a >Resort</a>
                         </li>
                         <li className="subitem2">
-                          <a href="#">Hostel</a>
+                          <a >Hostel</a>
                         </li>
                         <li className="subitem3">
-                          <a href="#">Apartment</a>
+                          <a >Apartment</a>
                         </li>
                       </ul>
                     </li>
                     <li className="item4">
-                      <a href="#">
+                      <a >
                         <span
                           className="glyphicon glyphicon-chevron-down"
                           aria-hidden="true"
@@ -214,18 +214,18 @@ class Search extends Component {
                       </a>
                       <ul>
                         <li className="subitem1">
-                          <a href="#">Mexican City</a>
+                          <a >Mexican City</a>
                         </li>
                         <li className="subitem2">
-                          <a href="#">Park View Center</a>
+                          <a >Park View Center</a>
                         </li>
                         <li className="subitem3">
-                          <a href="#">Land Park Center</a>
+                          <a >Land Park Center</a>
                         </li>
                       </ul>
                     </li>
                     <li className="item5">
-                      <a href="#">
+                      <a >
                         <span
                           className="glyphicon glyphicon-chevron-down"
                           aria-hidden="true"
@@ -234,13 +234,13 @@ class Search extends Component {
                       </a>
                       <ul>
                         <li className="subitem1">
-                          <a href="#">Diamond Park Colony</a>
+                          <a >Diamond Park Colony</a>
                         </li>
                         <li className="subitem2">
-                          <a href="#">E Park Road</a>
+                          <a >E Park Road</a>
                         </li>
                         <li className="subitem3">
-                          <a href="#">lake View Center</a>
+                          <a >lake View Center</a>
                         </li>
                       </ul>
                     </li>

@@ -106,16 +106,16 @@ class Banner extends Component {
               <div className="social-icons">
                 <ul>
                   <li>
-                    <a href="#" className="f1" />
+                    <a  className="f1" />
                   </li>
                   <li>
-                    <a href="#" className="f2" />
+                    <a  className="f2" />
                   </li>
                   <li>
-                    <a href="#" className="f3" />
+                    <a  className="f3" />
                   </li>
                   <li>
-                    <a href="#" className="f4" />
+                    <a  className="f4" />
                   </li>
                 </ul>
               </div>
