@@ -1,6 +1,6 @@
 export default {
     api: {
-        API_BASE_URL: "http://localhost:8000/",
+        API_BASE_URL: "http://ec2-18-136-105-22.ap-southeast-1.compute.amazonaws.com/",
         ROUTER_BASE_NAME: null,
     },
     app: {
