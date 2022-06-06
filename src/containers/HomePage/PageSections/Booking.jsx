@@ -107,7 +107,6 @@ class Booking extends Component {
                       className="date"
                       id="datepicker2"
                       type="date"
-                      defaultValue="Date"
                       onChange={(e) => this.handleOnchange(e, "end_date")}
                     />
                   </div>
@@ -116,33 +115,27 @@ class Booking extends Component {
                 <h4>Contact details</h4>
                 <input
                   type="text"
-                  defaultValue="Name"
-                  onfocus="this.value = '';"
-                  onblur="if (this.value == '') {this.value = 'Name';}"
+                  placeholder="Name"
                   onChange={(e) => this.handleOnchange(e, "guest_name")}
                   required
                 />
                 <input
                   type="text"
-                  defaultValue="Email"
-                  onfocus="this.value = '';"
-                  onblur="if (this.value == '') {this.value = 'Email';}"
+                  placeholder="Email"
                   onChange={(e) => this.handleOnchange(e, "guest_email")}
                   required
                 />
                 <input
                   type="text"
-                  defaultValue="Telephone"
+                  placeholder="Telephone"
                   onfocus="this.value = '';"
                   onblur="if (this.value == '') {this.value = 'Telephone';}"
                   onChange={(e) => this.handleOnchange(e, "guest_phone")}
                   required
                 />
                 <textarea
-                  onfocus="this.value = '' ;"
-                  onblur="if (this.value == '') {this.value = 'Message...';}"
+                  placeholder="Messenger"
                   required
-                  defaultValue={" Message... "}
                   onChange={(e) => this.handleOnchange(e, "note")}
                 />
                 <button

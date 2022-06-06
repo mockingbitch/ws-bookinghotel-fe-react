@@ -45,13 +45,13 @@ class Banner extends Component {
             <div className="header-nav">
               <div className="logo">
                 <h1>
-                  <a href="index.html">
+                  <Link to="/homepage">
                     <span
                       className="glyphicon glyphicon-home"
                       aria-hidden="true"
                     />
                     BookingHotel
-                  </a>
+                  </Link>
                 </h1>
               </div>
               <div className="navigation">
