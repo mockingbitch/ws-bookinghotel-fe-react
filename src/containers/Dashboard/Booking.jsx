@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import swal from "sweetalert";
 import { getAllUsers } from "../../services/UserService.jsx";
 import { getAllBookings } from "../../services/BookingService";
-import NumberFormat from "react-number-format";
+// import NumberFormat from "react-number-format";
 import HandleBookingModal from "./BookingModal/HandleBookingModal.jsx";
 
 class Booking extends Component {
@@ -139,12 +139,13 @@ class Booking extends Component {
                           </td>
                           <td className="align-middle text-center text-sm">
                             <span className="">
-                              <NumberFormat
+                              {/* <NumberFormat
                                 value={item.total}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"VND "}
-                              />
+                              /> */}
+                              {item.total}
                             </span>
                           </td>{" "}
                           <td className="align-middle text-center text-sm">
