@@ -27,6 +27,7 @@ class HandleBookingModal extends Component {
         guest_phone: booking.guest_phone,
         note: booking.note,
         total: booking.total,
+        admin_id: this.props.user.id
       });
       await this.getBookingDetail(this.state.id);
     }
@@ -237,7 +238,9 @@ class HandleBookingModal extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    user: state.user.userInfo
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

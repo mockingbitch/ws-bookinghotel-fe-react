@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link, NavLink, Redirect, Route, Switch } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { getAllCityService } from '../../../services/CityService';
+import * as actions from "../../../store/actions";
+
 
 class Banner extends Component {
   constructor(props) {
@@ -38,6 +40,7 @@ class Banner extends Component {
     let isLoggedIn = this.props.isLoggedIn;
     let cities = this.state.cities;
     let user = this.props.user;
+    const { processLogout } = this.props;
 
     return (
       <>
@@ -122,7 +125,15 @@ class Banner extends Component {
                           );
                         } else {
                           return (
-                            <></>
+                            <li>
+                              <Link
+                                style={{ textDecoration: "none" }}
+                                data-hover="LOGOUT"
+                                onClick={processLogout}
+                              >
+                                LOGOUT
+                              </Link>
+                            </li>
                           );
                         }
                       } else {
@@ -232,7 +243,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    processLogout: () => dispatch(actions.processLogout()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Banner);
