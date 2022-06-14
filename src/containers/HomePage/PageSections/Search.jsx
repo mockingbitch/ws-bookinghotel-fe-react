@@ -39,6 +39,14 @@ class Search extends Component {
     }
   };
 
+  handleOnChange = (e, id) => {
+    let twinState = { ...this.state };
+    twinState[id] = e.target.value;
+    this.setState({
+      ...twinState,
+    });
+  };
+
   render() {
     let arrHotels = this.state.arrHotels;
     let cities = this.state.cities;
@@ -55,11 +63,9 @@ class Search extends Component {
                     <input
                       type="text"
                       defaultValue="Hotel name..."
-                      onfocus="this.value = '';"
-                      onblur="if (this.value == '') {this.value = 'Hotel name...';}"
-                      required
+                      onChange={(e) => this.handleOnchange(e, 'hotel_name')}
                     />
-                    <input type="submit" defaultValue=" " />
+                    <input type="submit" onClick={() => this.handleSearchHotelByName()} />
                   </form>
                 </div>
                 <div className="range">

@@ -37,6 +37,7 @@ class Banner extends Component {
   render() {
     let isLoggedIn = this.props.isLoggedIn;
     let cities = this.state.cities;
+    let user = this.props.user;
 
     return (
       <>
@@ -45,13 +46,13 @@ class Banner extends Component {
             <div className="header-nav">
               <div className="logo">
                 <h1>
-                  <a href="index.html">
+                  <Link to="/homepage">
                     <span
                       className="glyphicon glyphicon-home"
                       aria-hidden="true"
                     />
                     BookingHotel
-                  </a>
+                  </Link>
                 </h1>
               </div>
               <div className="navigation">
@@ -89,7 +90,7 @@ class Banner extends Component {
                     </li>
                     <li>
                       <Link
-                        to="/booking"
+                        to="/page/book"
                         style={{ textDecoration: "none" }}
                         data-hover="BOOKING"
                       >
@@ -107,17 +108,23 @@ class Banner extends Component {
                     </li>
                     {(() => {
                       if (isLoggedIn) {
-                        return (
-                          <li>
-                            <Link
-                              to="/dashboard"
-                              style={{ textDecoration: "none" }}
-                              data-hover="DASHBOARD"
-                            >
-                              DASHBOARD
-                            </Link>
-                          </li>
-                        );
+                        if(user.position === 'AD'){
+                          return (
+                            <li>
+                              <Link
+                                to="/dashboard"
+                                style={{ textDecoration: "none" }}
+                                data-hover="DASHBOARD"
+                              >
+                                DASHBOARD
+                              </Link>
+                            </li>
+                          );
+                        } else {
+                          return (
+                            <></>
+                          );
+                        }
                       } else {
                         return (
                           <li>
@@ -220,6 +227,7 @@ class Banner extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
+    user: state.user.userInfo
   };
 };
 

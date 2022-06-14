@@ -150,6 +150,7 @@ class AddRoomModal extends Component {
                   onChange={(e) => this.handleOnChange(e, "type")}
                   className="form-control"
                 >
+                  <option>Please choose type</option>
                   <option value={1}>Normal</option>
                   <option value={2}>V.I.P</option>
                   <option value={3}>V.V.I.P</option>
@@ -162,6 +163,7 @@ class AddRoomModal extends Component {
                   onChange={(e) => this.handleOnChange(e, "hotel_id")}
                   className="form-control"
                 >
+                  <option>Choose hotel</option>
                   {arrHotels &&
                     arrHotels.map((item, key) => {
                       return <option value={item.id}>{item.name}</option>;

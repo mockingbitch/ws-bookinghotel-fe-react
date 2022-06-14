@@ -8,7 +8,12 @@ const getAllBookings = () => {
     return axios.get('/api/auth/admin/booking');
 }
 
+const handleBookingService = (data) => {
+    return axios.put('/api/auth/admin/booking', data);
+}
+
 export {
     createBookingService,
-    getAllBookings
+    getAllBookings,
+    handleBookingService
 }

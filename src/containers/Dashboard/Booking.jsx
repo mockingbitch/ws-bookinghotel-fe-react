@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import swal from "sweetalert";
 import { getAllUsers } from "../../services/UserService.jsx";
-import { getAllBookings } from "../../services/BookingService";
+import { getAllBookings, handleBookingService } from "../../services/BookingService";
 // import NumberFormat from "react-number-format";
 import HandleBookingModal from "./BookingModal/HandleBookingModal.jsx";
 
@@ -47,6 +47,26 @@ class Booking extends Component {
     });
   };
 
+  handleBookingStatus = async (id, data) => {
+    try {
+      data["booking_id"] = id;
+      let response = await handleBookingService(data);
+
+      if (response && response.errCode !== 0) {
+        swal("Something went wrong!", response.message, "warning");
+      } else {
+        swal("Good job!", response.message, "success");
+        await this.getAllBookings();
+        this.setState({
+          isOpenModalHandle: false,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      swal("Something went wrong!", 'error', "warning");
+    }
+  }
+
   toggleModal = () => {
     this.setState({
       isOpenModalHandle: false,
@@ -65,7 +85,7 @@ class Booking extends Component {
               isOpen={this.state.isOpenModalHandle}
               toggleFromParent={this.toggleModal}
               currentBooking={this.state.booking}
-              // createNewHotel={this.createNewHotel}
+              handleBookingStatus={this.handleBookingStatus}
             />
           )}
         </div>
@@ -109,7 +129,7 @@ class Booking extends Component {
                                     arrUsers.map((itemUser, key) => {
                                       return (
                                         <>
-                                          {item.guest_id == itemUser.id
+                                          {item.guest_id === itemUser.id
                                             ? itemUser.name
                                             : ""}
                                         </>
@@ -127,7 +147,7 @@ class Booking extends Component {
                                     arrUsers.map((itemUser, key) => {
                                       return (
                                         <>
-                                          {item.admin_id == itemUser.id
+                                          {item.admin_id === itemUser.id
                                             ? itemUser.name
                                             : ""}
                                         </>
@@ -147,7 +167,7 @@ class Booking extends Component {
                               /> */}
                               {item.total}
                             </span>
-                          </td>{" "}
+                          </td>
                           <td className="align-middle text-center text-sm">
                             <span className="badge badge-sm bg-gradient-success">
                               {item.status}

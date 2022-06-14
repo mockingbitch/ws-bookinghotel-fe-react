@@ -5,7 +5,8 @@ import HomeDashboard from "../containers/Dashboard/HomeDashboard";
 import Hotel from "../containers/Dashboard/Hotel";
 import Room from "../containers/Dashboard/Room";
 import RoomDetail from "../containers/Dashboard/RoomDetail";
-import Booking from '../containers/Dashboard/Booking';
+import User from "../containers/Dashboard/User";
+import Booking from "../containers/Dashboard/Booking";
 import "../assets/css/font-google.css";
 import "../assets/css/login-font.css";
 import "../assets/css/soft-ui-dashboard.css";
@@ -211,12 +212,13 @@ class Dashboard extends Component {
                   <span className="nav-link-text ms-1">Rooms</span>
                 </NavLink>
               </li>
-              <NavLink
-                to="/dashboard/users"
-                onClick={() => this.handleBreadcrumb("Users")}
-                className="nav-item"
-              >
-                <a className="nav-link">
+              <li className="nav-item">
+                <NavLink
+                  to="/dashboard/users"
+                  onClick={() => this.handleBreadcrumb("Users")}
+                  className="nav-link"
+                  activeClassName="active"
+                >
                   <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg
                       width="12px"
@@ -259,14 +261,15 @@ class Dashboard extends Component {
                     </svg>
                   </div>
                   <span className="nav-link-text ms-1">Users</span>
-                </a>
-              </NavLink>
-              <NavLink
-                to="/dashboard/bookings"
-                onClick={() => this.handleBreadcrumb("Bookings")}
-                className="nav-item"
-              >
-                <a className="nav-link">
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  to="/dashboard/bookings"
+                  onClick={() => this.handleBreadcrumb("Bookings")}
+                  className="nav-link"
+                  activeClassName="active"
+                >
                   <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg
                       width="12px"
@@ -309,8 +312,8 @@ class Dashboard extends Component {
                     </svg>
                   </div>
                   <span className="nav-link-text ms-1">Bookings</span>
-                </a>
                 </NavLink>
+              </li>
               <li className="nav-item">
                 <a className="nav-link">
                   <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -670,9 +673,10 @@ class Dashboard extends Component {
               <div className="col-12">
                 <Switch>
                   <Route exact path="/dashboard" component={HomeDashboard} />
-                  <Route path="/dashboard/hotels"  component={Hotel} />
+                  <Route path="/dashboard/hotels" component={Hotel} />
                   <Route path="/dashboard/rooms" component={Room} />
                   <Route path="/dashboard/room-detail" component={RoomDetail} />
+                  <Route path="/dashboard/users" component={User} />
                   <Route path="/dashboard/bookings" component={Booking} />
                   {/* <Route
                     component={() => {
@@ -796,8 +800,8 @@ class Dashboard extends Component {
                 />
               </div>
               <hr className="horizontal dark my-sm-4" />
-              <a className="btn bg-gradient-dark w-100">Source code</a>
-              <a className="btn btn-outline-dark w-100">View documentation</a>
+              <a href="https://github.com/mockingbitch" className="btn bg-gradient-dark w-100">Source code</a>
+              <a href="https://github.com/mockingbitch" className="btn btn-outline-dark w-100">View documentation</a>
               <div className="w-100 text-center">
                 <a
                   className="github-button"
