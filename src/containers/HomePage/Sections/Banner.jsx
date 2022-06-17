@@ -192,7 +192,7 @@ class Banner extends Component {
                   <div className="sort-by">
                     <select onChange={(e) => this.handleOnChange(e, 'city')}>
                       <option value>CHOOSE WHERE YOU WANNA GO</option>
-                      {cities && cities.map((item, key) => {
+                      {cities && cities.map((item) => {
                         return <option value={item.id}>{item.name}</option>
                       })}
                     </select>

@@ -39,6 +39,7 @@ class HandleBookingModal extends Component {
       this.setState({
         guest_name: response.bookingDetail.guest_name,
         admin_name: response.bookingDetail.admin_name,
+        hotel_name: response.bookingDetail.hotel_name,
         room_name: response.bookingDetail.room_name,
         start_date: response.bookingDetail.start_date,
         end_date: response.bookingDetail.end_date,
@@ -85,7 +86,7 @@ class HandleBookingModal extends Component {
         isOpen={this.props.isOpen}
         toggle={() => this.toggle()}
         className={"modal-hotel"}
-        size="l"
+        size="xl"
       >
         <ModalHeader toggle={() => this.toggle()}>
           View Booking Detail
@@ -116,6 +117,16 @@ class HandleBookingModal extends Component {
                     disabled
                   />
                 </div>
+              </div>
+              <div className="form-group mt-4">
+                <label htmlFor="inputName">Hotel name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputName"
+                  value={this.state.hotel_name}
+                  disabled
+                />
               </div>
               <div className="form-group mt-4">
                 <label htmlFor="inputName">Room name</label>

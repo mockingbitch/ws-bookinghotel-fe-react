@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import swal from "sweetalert";
 import { getAllUsers } from "../../services/UserService.jsx";
+import avatar from '../../assets/images/avatar.jpg';
 
 class User extends Component {
   constructor(props) {
@@ -81,7 +82,7 @@ class User extends Component {
                             <div className="d-flex px-2 py-1">
                               <div>
                                 <img
-                                //   src={avatar}
+                                  src={avatar}
                                   className="avatar avatar-lg me-3"
                                   alt="user1"
                                 />

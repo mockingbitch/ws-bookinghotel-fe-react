@@ -4,6 +4,7 @@ import { Link, NavLink, Redirect, Route, Switch } from "react-router-dom";
 import imgHotel from "../../../assets/images/444.jpg";
 import { getAllCityService } from "../../../services/CityService";
 import { getHotelByCityService } from '../../../services/HotelService';
+import { searchRoomService } from '../../../services/RoomService';
 
 class Search extends Component {
   constructor(props) {
@@ -11,6 +12,12 @@ class Search extends Component {
     this.state = {
       arrHotels: [],
       cities: [],
+      hotel_name_search: '',
+      room_name_search: '',
+      min_price_search: '',
+      max_price_search: '',
+      start_date_search: '',
+      end_date_search: ''
     };
   }
 
@@ -47,6 +54,21 @@ class Search extends Component {
     });
   };
 
+  searchRoom = async () => {
+    let response = await searchRoomService(
+      this.state.hotel_name_search, 
+      this.state.room_name_search, 
+      this.state.min_price_search, 
+      this.state.max_price_search, 
+      this.state.start_date_search, 
+      this.state.end_date_search);
+    if (response && response.errCode === 0) {
+      this.setState({
+        rooms: response.rooms
+      })
+    }
+  }
+
   render() {
     let arrHotels = this.state.arrHotels;
     let cities = this.state.cities;
@@ -58,15 +80,38 @@ class Search extends Component {
             <div className="search-grids">
               <div className="col-md-3 search-grid-left">
                 <div className="search-hotel">
-                  <h3 className="sear-head">Name contains</h3>
-                  <form>
+                  <h3 className="sear-head">Name contains:</h3>
                     <input
                       type="text"
-                      defaultValue="Hotel name..."
-                      onChange={(e) => this.handleOnchange(e, 'hotel_name')}
+                      placeholder="Hotel name..."
+                      onChange={(e) => this.handleOnChange(e, "hotel_name_search")}
                     />
-                    <input type="submit" onClick={() => this.handleSearchHotelByName()} />
-                  </form>
+                    <input
+                      type="text"
+                      placeholder="Room name..."
+                      onChange={(e) => this.handleOnChange(e, "room_name_search")}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Min Price"
+                      onChange={(e) => this.handleOnChange(e, "min_price_search")}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Max Price"
+                      onChange={(e) => this.handleOnChange(e, "max_price_search")}
+                    />
+                    <input
+                      type="date"
+                      onChange={(e) => this.handleOnChange(e, "start_date_search")}
+                    />
+                    <input
+                      type="date"
+                      className="datepicker"
+                      onChange={(e) => this.handleOnChange(e, "end_date_search")}
+                    />
+                    <br />
+                    <button className="btn btn-primary" onClick={() => this.searchRoom()}>Submit</button> 
                 </div>
                 <div className="range">
                   <h3 className="sear-head">Average nightly rate</h3>
