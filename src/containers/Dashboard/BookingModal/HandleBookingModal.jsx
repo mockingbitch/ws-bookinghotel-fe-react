@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import _ from "lodash";
 import { getBookingDetail } from "../../../services/BookingDetailService";
+import { getAllCodeService } from "../../../services/CodeService";
 
 class HandleBookingModal extends Component {
   constructor(props) {
@@ -17,19 +18,18 @@ class HandleBookingModal extends Component {
   }
 
   async componentDidMount() {
-    let booking = this.props.currentBooking;
+    let booking = await this.props.currentBooking;
+    await this.getAllCode();
     if (booking && !_.isEmpty(booking)) {
       this.setState({
         id: booking.id,
-        guest_id: booking.guest_id,
-        admin_id: booking.admin_id,
-        guest_name: booking.guest_name,
         guest_email: booking.guest_email,
         guest_phone: booking.guest_phone,
         note: booking.note,
-        total: booking.total
+        total: booking.total,
+        admin_id: this.props.user.id
       });
-      await this.getBookingDetail(booking.id);
+      await this.getBookingDetail(this.state.id);
     }
   }
 
@@ -37,9 +37,21 @@ class HandleBookingModal extends Component {
     let response = await getBookingDetail(id);
     if (response && response.errCode === 0) {
       this.setState({
-        room_id: response.bookingDetail.id,
+        guest_name: response.bookingDetail.guest_name,
+        admin_name: response.bookingDetail.admin_name,
+        hotel_name: response.bookingDetail.hotel_name,
+        room_name: response.bookingDetail.room_name,
         start_date: response.bookingDetail.start_date,
         end_date: response.bookingDetail.end_date,
+      });
+    }
+  };
+
+  getAllCode = async () => {
+    let response = await getAllCodeService("BOOKINGSTATUS");
+    if (response && response.errCode === 0) {
+      this.setState({
+        statusCode: response.codes,
       });
     }
   };
@@ -62,116 +74,164 @@ class HandleBookingModal extends Component {
     });
   };
 
-//   handleEditUser = () => {
-//     let isValid = this.checkValidateInput();
-
-//     if (isValid === true) {
-//       this.props.editHotel(this.props.currentHotel.id, this.state);
-//     }
-//   };
+  handleBooking = () => {
+    this.props.handleBookingStatus(this.props.currentBooking.id, this.state);
+  };
 
   render() {
-    console.log(this.state);
+    let statusCode = this.state.statusCode;
 
     return (
       <Modal
         isOpen={this.props.isOpen}
         toggle={() => this.toggle()}
         className={"modal-hotel"}
-        size="l"
+        size="xl"
       >
-        <ModalHeader toggle={() => this.toggle()}>View Booking Detail</ModalHeader>
+        <ModalHeader toggle={() => this.toggle()}>
+          View Booking Detail
+        </ModalHeader>
         <ModalBody>
           <span className={this.state.message.class}>
             {this.state.message.content}
           </span>
           <div className="modal-body-content">
             <div id="create-form" className="card mb-4">
-              {/* <div className="form-group mt-4">
+              <div className="row">
+                <div className="form-group mt-4 col-6">
+                  <label htmlFor="inputName">Guest name</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={this.state.guest_name}
+                    disabled
+                  />
+                </div>
+                <div className="form-group mt-4 col-6">
+                  <label htmlFor="inputName">Handler</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputName"
+                    value={this.state.admin_name}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className="form-group mt-4">
                 <label htmlFor="inputName">Hotel name</label>
                 <input
                   type="text"
                   className="form-control"
                   id="inputName"
-                  aria-describedby="nameHelp"
-                  placeholder="Enter hotel name"
-                  onChange={(e) => this.handleOnChange(e, "name")}
-                  value={this.state.name}
+                  value={this.state.hotel_name}
+                  disabled
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="inputCity">City</label>
+              <div className="form-group mt-4">
+                <label htmlFor="inputName">Room name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputName"
+                  value={this.state.room_name}
+                  disabled
+                />
+              </div>
+              <div className="row">
+                <div className="form-group mt-4 col-6">
+                  <label htmlFor="inputName">Start date</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputName"
+                    value={this.state.start_date}
+                    disabled
+                  />
+                </div>
+                <div className="form-group mt-4 col-6">
+                  <label htmlFor="inputName">End date</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputName"
+                    value={this.state.end_date}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="form-group mt-4 col-6">
+                  <label htmlFor="inputName">Email</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputName"
+                    value={this.state.guest_email}
+                    disabled
+                  />
+                </div>
+                <div className="form-group mt-4 col-6">
+                  <label htmlFor="inputName">Phone number</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputName"
+                    value={this.state.guest_phone}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className="form-group mt-4">
+                <label htmlFor="inputName">Total</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputName"
+                  value={this.state.total}
+                  disabled
+                />
+              </div>
+              <div className="form-group mt-4">
+                <label htmlFor="inputName">Note</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputName"
+                  value={this.state.note}
+                  disabled
+                />
+              </div>
+              <div className="form-group mt-4">
+                <label htmlFor="inputName">Status</label>
                 <select
-                  onChange={(e) => this.handleOnChange(e, "city_id")}
+                  onChange={(e) => this.handleOnChange(e, "status")}
                   className="form-control"
                 >
-                  {cities &&
-                    cities.map((item, key) => {
-                      if (city_id == item.id) {
+                  {statusCode &&
+                    statusCode.map((item, key) => {
+                      if (statusCode == item.key) {
                         return (
-                          <option value={item.id} selected>
-                            {item.name}
+                          <option value={item.key} selected>
+                            {item.value_vi}
                           </option>
                         );
                       } else {
-                        return <option value={item.id}>{item.name}</option>;
+                        return (
+                          <option value={item.key}>{item.value_vi}</option>
+                        );
                       }
                     })}
                 </select>
               </div>
-              <div className="form-group">
-                <label htmlFor="inputCity">Address</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputCity"
-                  placeholder="Enter city"
-                  onChange={(e) => this.handleOnChange(e, "address")}
-                  value={this.state.address}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="inputHotline">Hotline</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="hotline"
-                  id="inputHotline"
-                  placeholder="Enter hotline"
-                  onChange={(e) => this.handleOnChange(e, "hotline")}
-                  value={this.state.hotline}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="inputDescription">Description</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="description"
-                  id="inputDescription"
-                  placeholder="Enter description"
-                  onChange={(e) => this.handleOnChange(e, "description")}
-                  value={this.state.description}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="inputImage">Image</label>
-                <input
-                  type="file"
-                  className="form-control"
-                  name="image"
-                  id="inputImage"
-                  placeholder="Upload image"
-                />
-              </div> */}
             </div>
           </div>
         </ModalBody>
         <ModalFooter>
-          {/* <Button
+          <Button
             color="primary"
             className="px-3"
-            onClick={() => this.handleEditUser()}
+            onClick={() => this.handleBooking()}
           >
             Save
           </Button>
@@ -181,7 +241,7 @@ class HandleBookingModal extends Component {
             onClick={() => this.toggle()}
           >
             Close
-          </Button> */}
+          </Button>
         </ModalFooter>
       </Modal>
     );
@@ -189,7 +249,9 @@ class HandleBookingModal extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    user: state.user.userInfo
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

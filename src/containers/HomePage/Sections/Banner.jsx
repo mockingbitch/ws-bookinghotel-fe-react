@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link, NavLink, Redirect, Route, Switch } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { getAllCityService } from '../../../services/CityService';
+import * as actions from "../../../store/actions";
+
 
 class Banner extends Component {
   constructor(props) {
@@ -37,6 +39,8 @@ class Banner extends Component {
   render() {
     let isLoggedIn = this.props.isLoggedIn;
     let cities = this.state.cities;
+    let user = this.props.user;
+    const { processLogout } = this.props;
 
     return (
       <>
@@ -45,13 +49,13 @@ class Banner extends Component {
             <div className="header-nav">
               <div className="logo">
                 <h1>
-                  <a href="index.html">
+                  <Link to="/homepage">
                     <span
                       className="glyphicon glyphicon-home"
                       aria-hidden="true"
                     />
                     BookingHotel
-                  </a>
+                  </Link>
                 </h1>
               </div>
               <div className="navigation">
@@ -89,7 +93,7 @@ class Banner extends Component {
                     </li>
                     <li>
                       <Link
-                        to="/booking"
+                        to="/page/book"
                         style={{ textDecoration: "none" }}
                         data-hover="BOOKING"
                       >
@@ -107,17 +111,31 @@ class Banner extends Component {
                     </li>
                     {(() => {
                       if (isLoggedIn) {
-                        return (
-                          <li>
-                            <Link
-                              to="/dashboard"
-                              style={{ textDecoration: "none" }}
-                              data-hover="DASHBOARD"
-                            >
-                              DASHBOARD
-                            </Link>
-                          </li>
-                        );
+                        if(user.position === 'AD'){
+                          return (
+                            <li>
+                              <Link
+                                to="/dashboard"
+                                style={{ textDecoration: "none" }}
+                                data-hover="DASHBOARD"
+                              >
+                                DASHBOARD
+                              </Link>
+                            </li>
+                          );
+                        } else {
+                          return (
+                            <li>
+                              <Link
+                                style={{ textDecoration: "none" }}
+                                data-hover="LOGOUT"
+                                onClick={processLogout}
+                              >
+                                LOGOUT
+                              </Link>
+                            </li>
+                          );
+                        }
                       } else {
                         return (
                           <li>
@@ -174,7 +192,7 @@ class Banner extends Component {
                   <div className="sort-by">
                     <select onChange={(e) => this.handleOnChange(e, 'city')}>
                       <option value>CHOOSE WHERE YOU WANNA GO</option>
-                      {cities && cities.map((item, key) => {
+                      {cities && cities.map((item) => {
                         return <option value={item.id}>{item.name}</option>
                       })}
                     </select>
@@ -220,11 +238,14 @@ class Banner extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
+    user: state.user.userInfo
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    processLogout: () => dispatch(actions.processLogout()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Banner);

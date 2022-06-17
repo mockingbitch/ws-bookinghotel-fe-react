@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import swal from "sweetalert";
 import { getAllUsers } from "../../services/UserService.jsx";
-import { getAllBookings } from "../../services/BookingService";
+import { getAllBookings, handleBookingService } from "../../services/BookingService";
+import { getAllCodeService } from "../../services/CodeService";
 // import NumberFormat from "react-number-format";
 import HandleBookingModal from "./BookingModal/HandleBookingModal.jsx";
 
@@ -12,6 +13,7 @@ class Booking extends Component {
     this.state = {
       arrBookings: [],
       arrUsers: [],
+      codes: [],
       booking: {},
       isOpenModalHandle: false,
     };
@@ -20,6 +22,7 @@ class Booking extends Component {
   async componentDidMount() {
     await this.getAllUsers();
     await this.getAllBookings();
+    await this.getAllCodes();
   }
 
   getAllUsers = async () => {
@@ -40,12 +43,41 @@ class Booking extends Component {
     }
   };
 
+  getAllCodes = async () => {
+    let response = await getAllCodeService('BOOKINGSTATUS');
+    if (response && response.errCode === 0) {
+      this.setState({
+        codes: response.codes
+      });
+    }
+  }
+
   handleBooking = (data) => {
     this.setState({
       isOpenModalHandle: true,
       booking: data,
     });
   };
+
+  handleBookingStatus = async (id, data) => {
+    try {
+      data["booking_id"] = id;
+      let response = await handleBookingService(data);
+
+      if (response && response.errCode !== 0) {
+        swal("Something went wrong!", response.message, "warning");
+      } else {
+        swal("Good job!", response.message, "success");
+        await this.getAllBookings();
+        this.setState({
+          isOpenModalHandle: false,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      swal("Something went wrong!", 'error', "warning");
+    }
+  }
 
   toggleModal = () => {
     this.setState({
@@ -56,6 +88,7 @@ class Booking extends Component {
   render() {
     let arrBookings = this.state.arrBookings;
     let arrUsers = this.state.arrUsers;
+    let codes = this.state.codes;
 
     return (
       <>
@@ -65,7 +98,7 @@ class Booking extends Component {
               isOpen={this.state.isOpenModalHandle}
               toggleFromParent={this.toggleModal}
               currentBooking={this.state.booking}
-              // createNewHotel={this.createNewHotel}
+              handleBookingStatus={this.handleBookingStatus}
             />
           )}
         </div>
@@ -109,7 +142,7 @@ class Booking extends Component {
                                     arrUsers.map((itemUser, key) => {
                                       return (
                                         <>
-                                          {item.guest_id == itemUser.id
+                                          {item.guest_id === itemUser.id
                                             ? itemUser.name
                                             : ""}
                                         </>
@@ -127,7 +160,7 @@ class Booking extends Component {
                                     arrUsers.map((itemUser, key) => {
                                       return (
                                         <>
-                                          {item.admin_id == itemUser.id
+                                          {item.admin_id === itemUser.id
                                             ? itemUser.name
                                             : ""}
                                         </>
@@ -147,10 +180,14 @@ class Booking extends Component {
                               /> */}
                               {item.total}
                             </span>
-                          </td>{" "}
+                          </td>
                           <td className="align-middle text-center text-sm">
                             <span className="badge badge-sm bg-gradient-success">
-                              {item.status}
+                              {codes && codes.map((itemCode, index) => {
+                                if(item.status === itemCode.key) {
+                                  return <>{itemCode.value_vi}</>
+                                }
+                              })}
                             </span>
                           </td>
                           <td className="align-middle text-center text-sm">

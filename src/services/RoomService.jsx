@@ -19,10 +19,15 @@ const deleteRoomService = (id) => {
     return axios.delete(`/api/auth/admin/rooms?id=${id}`);
 }
 
+const searchRoomService = (hotel, room, min, max, start, end) => {
+    return axios.get(`/api/auth/search?hotel=${hotel}&room=${room}&min=${min}&max=${max}&start=${start}&end=${end}`);
+}
+
 export {
     getAllRooms,
     getRoomService,
     deleteRoomService,
     createRoomService,
-    editRoomService
+    editRoomService,
+    searchRoomService
 }
