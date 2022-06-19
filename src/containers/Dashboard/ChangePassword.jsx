@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import swal from "sweetalert";
 import { connect } from 'react-redux';
 import avatar from "../../assets/images/avatar.jpg";
-import { getUserProfileService } from '../../services/UserService.jsx';
+import { getUserProfileService, changePasswordService } from '../../services/UserService.jsx';
 
 class ChangePassword extends Component {
   constructor(props) {
@@ -24,6 +24,29 @@ class ChangePassword extends Component {
             user: response.user
         })
     }
+  }
+
+  handleOnChange = (e, id) => {
+    let twinState = { ...this.state };
+    twinState[id] = e.target.value;
+    this.setState({
+      ...twinState,
+    });
+  };
+
+  handleChangePassword = async () => {
+    try {
+        let user = this.props.user;
+        let response = await changePasswordService(user.token, this.state);
+  
+        if (response && response.errCode !== 0) {
+          swal("Something went wrong!", response.message, "warning");
+        } else {
+          swal("Good job!", response.message, "success");
+        }
+      } catch (e) {
+        console.log(e);
+      }
   }
 
   render() {
@@ -52,22 +75,21 @@ class ChangePassword extends Component {
                 <h6 className="text-right">Edit Profile</h6>
               </div>
               <div className="row mt-2">
-                <div className="col-md-6"><input type="text" className="form-control"  placeholder={user.name} /></div>
-                <div className="col-md-6"><input type="password" className="form-control" placeholder="Enter your current password" /></div>
+                <div className="col-md-6"><input type="text" className="form-control"  value={user.name} /></div>
+                <div className="col-md-6"><input type="password" className="form-control" onChange={(e) => this.handleOnChange(e, 'current_pass')} placeholder="Enter your current password" /></div>
               </div>
               <div className="row mt-3">
-                <div className="col-md-6"><input type="text" className="form-control" placeholder="Email" defaultValue={user.email} /></div>
-                <div className="col-md-6"><input type="password" className="form-control" placeholder="Enter new password" /></div>
+                <div className="col-md-6"><input type="text" className="form-control" placeholder="Email" value={user.email} /></div>
+                <div className="col-md-6"><input type="password" className="form-control" onChange={(e) => this.handleOnChange(e, 'new_pass')} placeholder="Enter new password" /></div>
               </div>
               <div className="row mt-3">
-                <div className="col-md-6"><input type="text" className="form-control" placeholder="address" defaultValue={user.position} /></div>
-                <div className="col-md-6"><input type="password" className="form-control" placeholder="Confirm new password" /></div>
+                <div className="col-md-6"><input type="text" className="form-control" placeholder="address" value={user.position} /></div>
+                <div className="col-md-6"><input type="password" className="form-control" onChange={(e) => this.handleOnChange(e, 'confirm_pass')} placeholder="Confirm new password" /></div>
               </div>
               <div className="row mt-3">
-                <div className="col-md-6"><input type="text" className="form-control" placeholder="Bank Name" defaultValue={user.phone} /></div>
-                <div className="col-md-6"><input type="text" className="form-control"  placeholder="Account Number" /></div>
+                <div className="col-md-6"><input type="text" className="form-control" placeholder="Bank Name" value={user.phone} /></div>
               </div>
-              <div className="mt-5 text-right"><button className="btn btn-primary profile-button" type="button">Save Profile</button></div>
+              <div className="mt-5 text-right"><button className="btn btn-primary profile-button" onClick={() => this.handleChangePassword()} type="button">Change Password</button></div>
             </div>
           </div>
         </div>

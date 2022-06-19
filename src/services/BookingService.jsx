@@ -1,7 +1,7 @@
 import axios from '../axios';
 
-const createBookingService = (data) => {
-    return axios.post('/api/auth/admin/booking', data);
+const createBookingService = (token, data) => {
+    return axios.post(`/api/auth/admin/booking?token=${token}`, data);
 }
 
 const getAllBookings = () => {

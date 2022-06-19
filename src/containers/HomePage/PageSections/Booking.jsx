@@ -34,7 +34,8 @@ class Booking extends Component {
 
   createBooking = async () => {
     try {
-      let response = await createBookingService(this.state);
+      let user = this.props.user;
+      let response = await createBookingService(user.token, this.state);
 
       if (response && response.errCode !== 0) {
         swal("Something went wrong!", response.message, "warning");
