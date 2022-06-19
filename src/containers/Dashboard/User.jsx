@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import swal from "sweetalert";
-import { getAllUsers } from "../../services/UserService.jsx";
-import avatar from '../../assets/images/avatar.jpg';
+import { getAllUsers, searchUserService } from "../../services/UserService.jsx";
+import avatar from "../../assets/images/avatar.jpg";
+import { getAllCodeService } from "../../services/CodeService";
 
 class User extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class User extends Component {
 
   async componentDidMount() {
     await this.getAllUsers();
+    await this.getAllCode();
   }
 
   getAllUsers = async () => {
@@ -26,14 +28,45 @@ class User extends Component {
     }
   };
 
+  getAllCode = async () => {
+    let response = await getAllCodeService("POSITION");
+    if (response && response.errCode === 0) {
+      this.setState({
+        codes: response.codes,
+      });
+    }
+  };
+
   toggleModal = () => {
     this.setState({
       isOpenModalHandle: false,
     });
   };
 
+  handleOnChange = (e, id) => {
+    let twinState = { ...this.state };
+    twinState[id] = e.target.value;
+    this.setState({
+      ...twinState,
+    });
+  };
+
+  handleSearchUser = async () => {
+    if (this.state.name_search === '' || this.state.name_search === null) {
+      await this.getAllUsers();
+    } else {
+      let response = await searchUserService(this.state.name_search);
+      if (response && response.errCode === 0) {
+        this.setState({
+          arrUsers: response.users
+        });
+      }
+    }
+  }
+
   render() {
     let arrUsers = this.state.arrUsers;
+    let codes = this.state.codes;
 
     return (
       <>
@@ -47,11 +80,20 @@ class User extends Component {
             />
           )}
         </div> */}
+        <div class="input-group">
+          <div class="form-outline">
+            <input type="search" id="form1" class="form-control" onChange={(e) => this.handleOnChange(e, "name_search")}/>
+            <label class="form-label" for="form1">
+              Search
+            </label>
+          </div>
+          <button onClick={() => this.handleSearchUser()} type="button" class="btn btn-primary" style={{height: "fit-content"}}>
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
         <div className="card mb-4">
           <div className="card-header pb-0">
-            <h6>
-              Users
-            </h6>
+            <h6>Users</h6>
           </div>
           <div className="card-body px-0 pt-0 pb-2">
             <div className="table-responsive p-0">
@@ -102,28 +144,14 @@ class User extends Component {
                           </td>
                           <td className="align-middle text-center text-sm">
                             <span className="badge badge-sm bg-gradient-success">
-                              {item.position}
+                              {codes &&
+                                codes.map((itemCode, key) => {
+                                  if (itemCode.key === item.position) {
+                                    return <>{itemCode.value_vi}</>;
+                                  }
+                                })}
                             </span>
                           </td>
-                          {/* <td
-                            className="align-middle"
-                            style={{ fontSize: "20px" }}
-                          >
-                            <button
-                              onClick={() => this.handleEdit(item)}
-                              className="btn btn-primary mx-1 font-weight-bold"
-                              data-toggle="tooltip"
-                            >
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => this.handleDelete(item)}
-                              className="btn btn-primary mx-1 font-weight-bold"
-                              data-toggle="tooltip"
-                            >
-                              Trash
-                            </button>
-                          </td> */}
                         </tr>
                       );
                     })}
