@@ -86,7 +86,7 @@ class HandleBookingModal extends Component {
         isOpen={this.props.isOpen}
         toggle={() => this.toggle()}
         className={"modal-hotel"}
-        size="xl"
+        size="l"
       >
         <ModalHeader toggle={() => this.toggle()}>
           View Booking Detail
