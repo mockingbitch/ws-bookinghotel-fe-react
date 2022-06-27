@@ -122,6 +122,7 @@ class AddHotelModal extends Component {
                   onChange={(e) => this.handleOnChange(e, "city_id")}
                   className="form-control"
                 >
+                  <option>Choose city</option>
                   {cities &&
                     cities.map((item, key) => {
                       return <option value={item.id}>{item.name}</option>;

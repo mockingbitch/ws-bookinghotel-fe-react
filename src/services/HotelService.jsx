@@ -18,11 +18,14 @@ const deleteHotelService = (id) => {
 const getHotelByCityService = (city_id) => {
     return axios.get(`/api/auth/hotels?city=${city_id}`);
 }
-
+const getUserTest = () => {
+    return axios.get('/api/auth/admin/testuser');
+}
 export {
     getHotels,
     deleteHotelService,
     createHotelService,
     editHotelService,
-    getHotelByCityService
+    getHotelByCityService,
+    getUserTest
 }

@@ -5,6 +5,7 @@ import {
   deleteHotelService,
   createHotelService,
   editHotelService,
+  getUserTest,
 } from "../../services/HotelService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import swal from "sweetalert";
@@ -29,6 +30,7 @@ class Hotel extends Component {
   async componentDidMount() {
     await this.getAllHotels();
     await this.getAllCities();
+    await this.getUser();
   }
 
   getAllHotels = async () => {
@@ -38,6 +40,12 @@ class Hotel extends Component {
         arrHotels: response.hotels,
       });
     }
+  };
+
+  getUser = async () => {
+    let response = await getUserTest();
+    console.log(response);
+    console.log("test");
   };
 
   getAllCities = async () => {
@@ -136,7 +144,7 @@ class Hotel extends Component {
   render() {
     let arrHotels = this.state.arrHotels;
     let cities = this.state.cities;
-    
+
     return (
       <>
         <div>
@@ -210,7 +218,11 @@ class Hotel extends Component {
                             {cities &&
                               cities.map((itemCity, key) => {
                                 return (
-                                  <p className="text-xs text-secondary mb-0">{itemCity.id == item.city_id ? itemCity.name: ''}</p>
+                                  <p className="text-xs text-secondary mb-0">
+                                    {itemCity.id == item.city_id
+                                      ? itemCity.name
+                                      : ""}
+                                  </p>
                                 );
                               })}
                           </td>

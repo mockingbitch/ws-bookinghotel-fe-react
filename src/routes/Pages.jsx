@@ -10,6 +10,7 @@ import Booking from "../containers/HomePage/PageSections/Booking";
 import Hotels from "../containers/HomePage/PageSections/Hotels";
 import Rooms from "../containers/HomePage/PageSections/Rooms";
 import Search from "../containers/HomePage/PageSections/Search";
+import HotelToBook from "../containers/HomePage/PageSections/HotelToBook";
 
 class Pages extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class Pages extends Component {
           <Route path="/page/booking" component={Booking} />
           <Route path="/page/room" component={Rooms} />
           <Route path="/page/search" component={Search} />
+          <Route path="/page/book" component={HotelToBook} />
         </Switch>
         <Footer />
       </>

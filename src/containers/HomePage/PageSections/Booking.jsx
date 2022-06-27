@@ -15,11 +15,12 @@ class Booking extends Component {
   async componentDidMount() {
     let room = await this.props.location.state;
     let user = this.props.user.userInfo;
+    console.log(user);
     this.setState({
       room: room,
       room_id: room.id,
       members: 1,
-      user_id: user.id,
+      // user_id: user.id,
     });
   }
 
@@ -33,7 +34,8 @@ class Booking extends Component {
 
   createBooking = async () => {
     try {
-      let response = await createBookingService(this.state);
+      let user = this.props.user;
+      let response = await createBookingService(user.token, this.state);
 
       if (response && response.errCode !== 0) {
         swal("Something went wrong!", response.message, "warning");
@@ -107,7 +109,6 @@ class Booking extends Component {
                       className="date"
                       id="datepicker2"
                       type="date"
-                      defaultValue="Date"
                       onChange={(e) => this.handleOnchange(e, "end_date")}
                     />
                   </div>
@@ -116,33 +117,27 @@ class Booking extends Component {
                 <h4>Contact details</h4>
                 <input
                   type="text"
-                  defaultValue="Name"
-                  onfocus="this.value = '';"
-                  onblur="if (this.value == '') {this.value = 'Name';}"
+                  placeholder="Name"
                   onChange={(e) => this.handleOnchange(e, "guest_name")}
                   required
                 />
                 <input
                   type="text"
-                  defaultValue="Email"
-                  onfocus="this.value = '';"
-                  onblur="if (this.value == '') {this.value = 'Email';}"
+                  placeholder="Email"
                   onChange={(e) => this.handleOnchange(e, "guest_email")}
                   required
                 />
                 <input
                   type="text"
-                  defaultValue="Telephone"
+                  placeholder="Telephone"
                   onfocus="this.value = '';"
                   onblur="if (this.value == '') {this.value = 'Telephone';}"
                   onChange={(e) => this.handleOnchange(e, "guest_phone")}
                   required
                 />
                 <textarea
-                  onfocus="this.value = '' ;"
-                  onblur="if (this.value == '') {this.value = 'Message...';}"
+                  placeholder="Messenger"
                   required
-                  defaultValue={" Message... "}
                   onChange={(e) => this.handleOnchange(e, "note")}
                 />
                 <button

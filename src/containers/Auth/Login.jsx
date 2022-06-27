@@ -49,7 +49,7 @@ class Login extends Component {
         });
       }
       if (data && data.errCode === 0) {
-        this.props.userLoginSuccess(data.user);
+        this.props.userLoginSuccess(data.user, data.access_token);
       }
     } catch (e) {
       if (e.response) {
@@ -363,8 +363,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    userLoginSuccess: (userInfo) =>
-    dispatch(actions.userLoginSuccess(userInfo)),
+    userLoginSuccess: (userInfo, token) => dispatch(actions.userLoginSuccess(userInfo, token)),
     changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
   };
 };
